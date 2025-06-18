@@ -1,4 +1,4 @@
-package service;
+package com.yasiel.studentleaderboard.service;
 
 import com.yasiel.studentleaderboard.model.Student;
 import com.yasiel.studentleaderboard.repository.StudentRepository;
@@ -17,14 +17,15 @@ public class StudentService {
         this.repository = repository;
     }
 
+    public List<Student> getTop5Students() {
+        return repository.findTop5ByOrderByScoreDesc();
+    }
+
     public List<Student> getAllStudents() {
         return repository.findAll();
     }
 
-    public Student getStudentById(Long id) {
-        return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Student not found"));
+    public Student saveStudent(Student student) {
+        return repository.save(student);
     }
-
-    // You can add save, delete, update, etc. here
 }
