@@ -25,7 +25,7 @@ public class StudentService {
         return repository.findAll();
     }
 
-    public Student saveStudent(Student student) {
+    public Student addStudent(Student student) {
         return repository.save(student);
     }
 }

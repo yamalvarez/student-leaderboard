@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
@@ -18,19 +19,21 @@ import java.util.List;
 public class StudentController {
 
     // Inject the StudentService to handle business logic
-    @Autowired
-    private StudentService studentService;
+    private final StudentService studentService;
+
+    public StudentController(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @PostMapping
-    public ResponseEntity<StudentResponse> addStudent(@Valid @RequestBody StudentRequest request) {
-        Student student = new Student();
-        student.setName(request.getName());
-        student.setScore(request.getScore());
+    public ResponseEntity<?> addStudent(@Valid @RequestBody Student student, BindingResult result) {
+        if (result.hasErrors()) {
+            String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(errorMessage);
+        }
 
-        Student saved = studentService.saveStudent(student);
-        StudentResponse response = new StudentResponse(saved.getId(), saved.getName(), saved.getScore());
-
-        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        Student savedStudent = studentService.addStudent(student);
+        return ResponseEntity.ok(savedStudent);
     }
 
 
