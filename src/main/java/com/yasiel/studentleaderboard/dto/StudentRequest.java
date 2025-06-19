@@ -1,7 +1,5 @@
-// StudentRequest.java
 package com.yasiel.studentleaderboard.dto;
 
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 
@@ -10,14 +8,12 @@ public class StudentRequest {
     @NotBlank(message = "Name is required")
     private String name;
 
-    @Min(value = 1, message = "Grade must be between 1 and 12")
-    @Max(value = 12, message = "Grade must be between 1 and 12")
+    @Min(value = 1, message = "Grade level must be at least 1")
     private int gradeLevel;
 
-    @Min(value = 0, message = "Score must be at least 0")
-    @Max(value = 100, message = "Score must be at most 100")
     private int score;
 
+    // Getters and setters
     public String getName() {
         return name;
     }
@@ -33,6 +29,7 @@ public class StudentRequest {
     public void setGradeLevel(int gradeLevel) {
         this.gradeLevel = gradeLevel;
     }
+
     public int getScore() {
         return score;
     }

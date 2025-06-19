@@ -6,6 +6,9 @@ import com.yasiel.studentleaderboard.model.Student;
 import com.yasiel.studentleaderboard.service.StudentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -26,11 +29,16 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<?> addStudent(@Valid @RequestBody Student student, BindingResult result) {
+    public ResponseEntity<?> addStudent(@Valid @RequestBody StudentRequest request, BindingResult result) {
         if (result.hasErrors()) {
             String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
             return ResponseEntity.badRequest().body(errorMessage);
         }
+
+        Student student = new Student();
+        student.setName(request.getName());
+        student.setGradeLevel(request.getGradeLevel());
+        student.setScore(request.getScore());
 
         Student savedStudent = studentService.addStudent(student);
         return ResponseEntity.ok(savedStudent);
@@ -42,8 +50,10 @@ public class StudentController {
      * URL: GET /students
      */
     @GetMapping
-    public List<Student> getAllStudents() {
-        return studentService.getAllStudents();
+    public Page<Student> getAllStudents(@RequestParam(defaultValue = "0") int page,
+                                        @RequestParam(defaultValue = "5") int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return studentService.getAllStudents(pageable);
     }
 
     /**
