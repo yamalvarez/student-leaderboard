@@ -18,7 +18,7 @@ class StudentServiceTest {
     @BeforeEach
     void setUp() {
         repository = mock(StudentRepository.class); // Create a mock repository
-        service = new StudentService(repository);   // Pass it to the service
+        service = new StudentServiceImpl(repository);   // Pass it to the service
     }
 
     @Test
@@ -35,4 +35,5 @@ class StudentServiceTest {
         assertEquals(2, result.size());
         assertEquals("Yasiel", result.get(0).getName());
     }
+
 }

@@ -8,12 +8,16 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Data;
 import jakarta.validation.constraints.*;
+
+import java.io.Serializable;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Student {
+public class Student implements Serializable {
 
+        private static final long serialVersionUID = 1L;
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
@@ -37,5 +41,9 @@ public class Student {
     }
 
     public Student(String name, int score, int gradeLevel) {
+        this.name = name;
+        this.score = score;
+        this.gradeLevel = gradeLevel;
     }
+
 }

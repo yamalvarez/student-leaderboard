@@ -3,6 +3,7 @@ package com.yasiel.studentleaderboard.controller;
 import com.yasiel.studentleaderboard.model.Student;
 import com.yasiel.studentleaderboard.repository.StudentRepository;
 import com.yasiel.studentleaderboard.service.StudentService;
+import com.yasiel.studentleaderboard.service.StudentServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(StudentController.class)
-@Import(StudentService.class) // Import service manually if you're using it
+@Import(StudentServiceImpl.class) // Import service manually if you're using it
 class StudentControllerTest {
 
     @Autowired
@@ -42,4 +43,5 @@ class StudentControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.size()").value(2));
     }
+
 }
