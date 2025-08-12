@@ -1,29 +1,42 @@
+Student Leaderboard API
+Java | Spring Boot | PostgreSQL | Redis | Google Cloud Run | CI/CD
 
-# 🏆 Student Leaderboard API
-
-A backend application built with **Spring Boot**, **Redis**, and deployed on **Google Cloud Run**. It provides a simple REST API to manage and rank students by score.
-
----
-
-## 🚀 Features
-
-- RESTful API with Spring Boot  
-- In-memory caching using Redis  
-- Dockerized for containerized deployment  
-- Deployed to Google Cloud Run  
-- Clean code with layered architecture  
+A backend service for managing student scores, rankings, and leaderboards.
+Built with Java 17 and Spring Boot, featuring performance optimization, caching, and cloud deployment.
 
 ---
 
-## 📦 Tech Stack
+🚀 Features
+Full CRUD operations for managing students and their scores
 
-- Java 17  
-- Spring Boot  
-- Spring Data JPA  
-- Redis  
-- Docker  
-- Google Cloud Platform (Cloud Run)  
-- H2 In-Memory Database (for local testing)  
+Input validation with meaningful error handling
+
+Redis caching for fast leaderboard retrieval
+
+Pagination support for large datasets
+
+Swagger/OpenAPI documentation for easy API exploration
+
+Dockerized for consistent builds and deployments
+
+CI/CD pipelines using GitHub Actions
+
+Cloud deployment on Google Cloud Run
+
+🛠 Tech Stack
+Java 17, Spring Boot
+
+PostgreSQL (primary database)
+
+Redis (caching layer)
+
+Swagger/OpenAPI (API documentation)
+
+Docker
+
+Google Cloud Run (deployment)
+
+GitHub Actions (CI/CD)  
 
 ---
 
